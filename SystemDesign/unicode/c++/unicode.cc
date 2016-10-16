@@ -27,12 +27,22 @@ using namespace std;
 #define CHAR_2 0x010203C0
 #define CHAR_3 0x010203E0
 #define CHAR_4 0x010203F0
-//#define UNICODE_VALUE 0x5D0
+#define UNICODE_VALUE 0x5D0
 //#define UNICODE_VALUE 0x3C0 // PI
 //#define UNICODE_VALUE 0x3C6
-#define UNICODE_VALUE 0xB2ED // 닭
+//#define UNICODE_VALUE 0xB2ED // 닭
 
 /*
+ * 
+ * 유니코드는 0x5D0 이라고 되어있으면 D0 이 실제 몇 바이트인지를 나타내는 것이다.
+ * UTF-8 로 변환되면 바이트 순서가 바뀐다. 일단 어떤 포멧인지를 보고 
+ * 만약 2 바이트면 주어진 유니 코드에서 앞에 3 뒤에 2을 제외한 16 - 5 는 11바이트를
+ * 슬롯 0 에서 부터 읽으면 되고 그 읽은 값을 패턴에 맞게 써주면 된다. 
+ *
+ * 만약 3 바이트라면 4, 6, 6 즉 16 비트를 앞에서 부터 가져와서 끊어서
+ *
+ * 1110 ㅌㅌㅌㅌ    10 ㅌㅌㅌㅌㅌㅌ    10ㅌㅌㅌㅌㅌㅌ
+ *
  * alfre unicode value 0x5D0 == U+05D0
  *
  * Two byte unicode is
@@ -64,7 +74,7 @@ using namespace std;
  * 11110 + 3bit, 10 + 6bit, 10 + 6bit, 10 + 6bit = 21비트 
  */
 
-int main() {
+int unicode1() {
   unsigned int i = UNICODE_VALUE;
   unsigned int byteMask = (1<<8)-1;
   unsigned int threeBitMask = (1<<3)-1;
@@ -134,5 +144,82 @@ int main() {
   }
   //cout << "result: " << result << endl;
   printf ("Unicode (%0X)-> UTF8 : (%0X) \n", UNICODE_VALUE, result);
+  return 0;
+}
+
+unsigned int getBits(unsigned int target, int count, int start) {
+  unsigned int mask = (1 << count) - 1;
+  mask = mask << start;
+  unsigned int tmp = target & mask;
+  tmp = tmp >> start;
+  return tmp;
+}
+
+int getType(unsigned int value) {
+  int r;
+
+  unsigned int tmp = getBits(value, 1, 7);
+
+  if (tmp == 0) {
+    return 1;
+  }
+  else if ((tmp = getBits(value, 3, 5)) == 0x6) {
+    return 2;
+  }
+  else if ((tmp = getBits(value, 4, 4)) == 0xE) {
+    return 3;
+  }
+  else if ((tmp = getBits(value, 5, 3)) == 0x1E) {
+    return 4;
+  }
+  else return -1;
+}
+
+unsigned int setBits(unsigned int target, int source, int count, int start) {
+  unsigned int tmp = getBits(source, count, 0);
+  tmp = tmp << start;
+  target = target | tmp;
+  return target;
+} 
+
+int unicode2(unsigned int value) {
+  int numByte = getType(getBits(value, 8, 0));
+
+  unsigned int r;
+
+  switch (numByte) 
+  {
+  case 1: {
+    int r = getBits(value, 8, 0);
+    break;
+  }
+  case 2: {
+    // get 11 bit from LSB (5, 6)
+    unsigned int tmp = getBits(value, 11, 0);
+    unsigned int bits1 = getBits(tmp, 5, 6);
+    unsigned int bits2 = getBits(tmp, 6, 0);
+    r = 0xC080;
+    r = setBits(r, bits1, 5, 8);
+    r = setBits(r, bits2, 6, 0);
+    break;
+  }
+  case 3: {
+    // get 16 bit from LSB (4, 6, 6)
+    break;
+  }
+  case 4: {
+    // get 21 bit from LSB (3, 6, 6, 6)
+    break;
+  }
+  default:
+    break;
+  }
+  return r;
+}
+
+int main() {
+  unicode1();
+  int r = unicode2(UNICODE_VALUE);
+  printf("unicode2: %0X\n", r);
   return 0;
 }
