@@ -15,6 +15,28 @@
  *
  * =====================================================================================
  */
+
+/*
+ * How to replace a map and vector
+ *
+ * last index key array -1 means not yet started
+ *
+ * this key arrays holds top index adding ++index, popping --index;
+ *
+ * start time  [0][1][2][3].....[MAX_PACKET]
+ * end time    [0][1][2][3].....[MAX_PACKET]
+ *         [0] 
+ *         [1]
+ *         [2]
+ *         [3]
+ *
+ * This is a problem because cpu is 0~4 always first comer applied
+ *
+ * if 5 max packet, now 4 packet with all 3 cpu enabled, each having 9, 8, 2 remaining time with the entered packet 
+ * needs 6 slot to finish. In this case, cpu2 should be alloced and that is only way to finish with time
+ * you can save this min value to [4][7][9][8][2] = 3 and this value never changes.
+ *
+ */
 #include <iostream>
 #include <map>
 #include <vector>
@@ -49,6 +71,7 @@ int memo[MAX_PACKET][10][10][10] = { 0, };
 // cpu[2]
 // cpu[3]
 // cpu[4]
+
 bool isTurnedOn(int status, int cpuNo) {
   int mask = 1 << cpuNo;
   status = status & mask;
@@ -158,7 +181,8 @@ int getMinCpu(int packet, int cpuStatus, map<int, vector<std::pair<int, int>> >&
   } 
  
    
-  memo[packet][cpu0][cpu1][cpu2] = r;
+  memo[packet][cpu0][cpu1][cpu2] = r; // to be more accurate, packet/cpuonoffstatus/0/1/2/3 would be more accurate
+  // if 5 cpu possible combination 32 (5bits all) 
   return r; 
 }
 
