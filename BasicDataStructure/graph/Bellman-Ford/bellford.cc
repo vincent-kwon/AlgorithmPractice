@@ -34,6 +34,8 @@ int m[NODE_NUM][NODE_NUM] = {
 
 int dt[NODE_NUM] = {0, INF, INF, INF, INF};
 
+// TODO: negative cycle
+//
 int main() {
   for (int i = 0; i < NODE_NUM; i++) {
     for (int adj = 0; adj < NODE_NUM; adj++) {
