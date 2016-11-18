@@ -34,35 +34,33 @@ class DataProvider {
     cout << "DP: " << ss.str().c_str() << endl;
     fileInputPtr->seekg(0, ios::beg);
   }
-
-  bool hasNext() {
-    // how to detect has next has really next??????`
-    if (fileInputPtr->eof()) {
-      return false;
-    }
-    else return true;
-  }
-
-  int getNext() {
-    if (currentIndex != EMPTY) {
-      return memory[currentIndex--];
+  
+  bool getNext(int& outValue) {
+    if (currentIndex > EMPTY) {
+      outValue = memory[currentIndex--];
+      return true;
     } 
     else {
       int value;
       *fileInputPtr >> value;
-      while (!fileInputPtr->eof() && currentIndex < maxIndex){
-        currentIndex++;
-        memory[currentIndex] = value;
-        (*fileInputPtr) >> value;
+      while (!fileInputPtr->eof()) {
+        if (currentIndex < maxIndex) {
+          currentIndex++;
+          memory[currentIndex] = value;
+          if (currentIndex == maxIndex) break;
+          else (*fileInputPtr) >> value;
+        } 
       }
       if (currentIndex == EMPTY) {
-        //throw NoDataException();
+        return false;
       }
       else {
-        return memory[currentIndex--];
+        outValue =  memory[currentIndex--];
+        return true;
       }
     } 
   }
+
  private:
   ifstream* fileInputPtr;
   int currentIndex;
@@ -96,14 +94,17 @@ int main() {
     chunkArray[i] = new DataProvider(memory + i , perChunkMemory, i);
   }
   bool anyActive;
+  int count = 0; 
   do {
     anyActive = false;
     for (int i = 0; i < chunk_num; i++) {
-      if (chunkArray[i]->hasNext()) {
-        cout << i << ":" << chunkArray[i]->getNext() << endl;
+      int outValue;
+      if (chunkArray[i]->getNext(outValue)) {
+        count++;
         anyActive = true;
       }
     }
   } while (anyActive);
+  cout << count << endl; 
   return 0;
 }

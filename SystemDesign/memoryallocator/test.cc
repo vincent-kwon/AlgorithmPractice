@@ -31,5 +31,14 @@ int main() {
   outptr->flush();
   outptr->close();
   ifstream infile("hello.txt");
+
+  // in int : MSB     LSB
+  //          0  1  2  3
+  // to char LSB comes first 
+  //          3  2  1  0 (little endian, LSB is first element byte array in memroy)
+  int a[2] = { 0x30313233, 0x35363738 };
+  char *cstr = (char *)a;
+  for (int i = 0; i < 8; i++) 
+    cout << cstr[i] << endl;
   return 0;
 }
