@@ -17,12 +17,13 @@
  */
 
 #include <iostream>
+#include <stdexcept>
 #include "vclist.h"
 
 using namespace std;
 
 template <typename T>
-vclist<T>::vclist() : head(NULL), tail(NULL) {
+vclist<T>::vclist() : head(NULL), tail(NULL), count(0) {
 
 }
 
@@ -33,6 +34,7 @@ vclist<T>::~vclist() {
 
 template <typename T>
 void vclist<T>::push_front(T i) {
+  count++;
   Node<T>* n = new Node<T>();
   n->value = i;
   if (head == NULL) {
@@ -51,6 +53,7 @@ void vclist<T>::push_front(T i) {
 
 template <typename T>
 void vclist<T>::push_back(T i) {
+  count++;
   Node<T>* n = new Node<T>();
   n->value = i;
   if (tail == NULL) {
@@ -60,41 +63,72 @@ void vclist<T>::push_back(T i) {
   }
 
   else {
-    n->next = tail;
-    n->prev = tail->prev;
-    head->prev = n;
-    tail = n;  
+    n->prev = tail;
+    n->next = NULL;
+    tail->next = n;
+    tail = n;
   }
 }
 
 template <typename T>
 void vclist<T>::pop_front() {
-
+  if (head == NULL) { // nothing to return;
+     return;
+  }
+  else {
+    count--;
+    Node<T>* tmp = head->next;
+    if (tmp == NULL) {
+      head = tail = NULL;
+    }
+    else {
+      head = tmp;
+      head->prev = NULL;
+    }
+  }
 }
 
 template <typename T>
 void vclist<T>::pop_back() {
-
+  if (tail == NULL) {
+    return;
+  }
+  else {
+    count--;
+    Node<T>* tmp = tail->prev;
+    if (tmp == NULL) {
+      head = tail = NULL;
+    }
+    else {
+      tmp->next = NULL;
+      tail = tmp;
+    }
+  }
 }
 
 template <typename T>
 T vclist<T>::front() {
-  return head->value;
+  if (head != NULL) return head->value;
+  else throw underflow_error("no element"); 
 }
 
 template <typename T>
 T vclist<T>::back() {
-  return tail->value;
+  if (tail != NULL) return tail->value;
+  else throw underflow_error("no element");
 }
 
 template <typename T>
-void vclist<T>::begin() {
-
+Iterator<Node<T>> vclist<T>::begin() {
+  Iterator<Node<T>> itor(head, tail);
+  return itor;
 }
 
 template <typename T>
-void vclist<T>::end() {
-
+Iterator<Node<T>> vclist<T>::end() {
+  Iterator<Node<T>> itor(head, tail);
+  itor.pos = tail + 1;
+  return itor;
 }
 
 template <typename T>
@@ -109,7 +143,7 @@ void vclist<T>::erase(T i) {
 
 template <typename T>
 int vclist<T>::size() {
-  return 0;
+  return count;
 }
 
 template <typename T>
@@ -124,7 +158,16 @@ int main() {
   l.push_front(300);
   l.push_back(1000);
   l.push_back(2000);
+  Iterator<Node<int>> itor = l.begin();
+//  for (itor; itor != l.end(); itor++) {
+//    cout << *itor << endl;
+//  }
+  l.pop_front();
+  l.pop_back();
+  l.pop_back();
+  l.pop_front();
   cout << l.front() << endl;
   cout << l.back() << endl;
+  cout << l.size() << endl;
   return 0;
 }

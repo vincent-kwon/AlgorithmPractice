@@ -19,18 +19,21 @@
 #ifndef __vclist_h__
 #define __vclist_h__
 #include <iostream>
+#include "iterator.h"
+
 using namespace std;
+
+template <typename T>
+class Node {
+ public: 
+  T value;
+  Node<T>* next;
+  Node<T>* prev;
+};
 
 template <typename T>
 class vclist {
  public:
-  template <typename S>
-  class Node {
-   public: 
-     S value;
-     Node<S>* next;
-     Node<S>* prev;
-  };
   vclist();
   virtual ~vclist();
   virtual void push_front(T t);
@@ -39,8 +42,8 @@ class vclist {
   virtual void pop_back();
   virtual T front();
   virtual T back();
-  virtual void begin();
-  virtual void end();
+  Iterator<Node<T>> begin();
+  Iterator<Node<T>> end();
   virtual void insert(T t);
   virtual void erase(T t);
   virtual int size();
@@ -49,10 +52,10 @@ class vclist {
   // add (lambda enabled)
   // subclassing vclist so it can add top, add, and disable front (is it possible??? polymophism) 
   // iterator
- protected:
   Node<T>* head;
   Node<T>* tail;
-
+  //Node<T>** itorator;
+  int count;
  private:
   // prohibit copy constructor
   // vclist(const T& obj); Todo
