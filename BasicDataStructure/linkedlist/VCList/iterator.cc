@@ -11,47 +11,54 @@
  *       Compiler:  gcc
  *
  *         Author:  Hobum (Vincent) Kwon (mn), hobum.kwon@gmail.com
- *        Company:  Samsung Electornics
+ *        Company:  Tamsung Electornics
  *
  * =====================================================================================
  */
 
 #include <iostream>
 #include "iterator.h"
+#include <stdexcept>
 
 using namespace std;
 
-template <typename S>
-Iterator<S>::Iterator(Node<S>* h, Node<S>* t) : head(h->head), pos(h->pos), tail(h->tail) {
+template <typename T>
+Iterator<T>::Iterator(Node<T>* h) : head(h), pos(h) {
   
 }
 
-template <typename S>
-Iterator<Node<S>>& Iterator<S>::operator+(int offset) {
-  pos = pos + offset;
+template <typename T>
+Iterator<T>& Iterator<T>::operator++() {
+  if (pos != NULL) {
+	  pos = pos->next;
+  }
+  else {
+  	throw underflow_error("no more possible");
+  }
   return *this;
 }
 
-template <typename S>
-bool Iterator<S>::operator==(const S& rhs) {
+template <typename T>
+bool Iterator<T>::operator==(const Iterator<T>& rhs) {
   if (pos == rhs.pos) return true;
   else return false;
 }
 // need to define equal here
 
-template <typename S>
-bool Iterator<S>::operator!=(const S& rhs) {
-  if (pos <= rhs.tail) return false;
+template <typename T>
+bool Iterator<T>::operator!=(const Iterator<T>& rhs) {
+  if (pos == rhs.pos) return false;
   else return true;
 }
 
-template <typename S>
-S Iterator<S>::operator*() {
+template <typename T>
+T Iterator<T>::operator*() {
   return (pos->value);
 }
 
-template <typename S>
+template <typename T>
 Iterator<T>:: ~Iterator() {
-
+  cout << "Destructor" << endl;
 }
 
+template class Iterator<int>;

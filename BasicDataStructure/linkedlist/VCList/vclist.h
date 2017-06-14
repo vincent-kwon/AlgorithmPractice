@@ -24,14 +24,6 @@
 using namespace std;
 
 template <typename T>
-class Node {
- public: 
-  T value;
-  Node<T>* next;
-  Node<T>* prev;
-};
-
-template <typename T>
 class vclist {
  public:
   vclist();
@@ -42,8 +34,8 @@ class vclist {
   virtual void pop_back();
   virtual T front();
   virtual T back();
-  Iterator<Node<T>> begin();
-  Iterator<Node<T>> end();
+  Iterator<T> begin();
+  Iterator<T> end();
   virtual void insert(T t);
   virtual void erase(T t);
   virtual int size();

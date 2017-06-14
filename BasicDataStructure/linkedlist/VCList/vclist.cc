@@ -119,15 +119,14 @@ T vclist<T>::back() {
 }
 
 template <typename T>
-Iterator<Node<T>> vclist<T>::begin() {
-  Iterator<Node<T>> itor(head, tail);
+Iterator<T> vclist<T>::begin() {
+  Iterator<T> itor(head);
   return itor;
 }
 
 template <typename T>
-Iterator<Node<T>> vclist<T>::end() {
-  Iterator<Node<T>> itor(head, tail);
-  itor.pos = tail + 1;
+Iterator<T> vclist<T>::end() {
+  Iterator<T> itor(0);
   return itor;
 }
 
@@ -158,10 +157,11 @@ int main() {
   l.push_front(300);
   l.push_back(1000);
   l.push_back(2000);
-  Iterator<Node<int>> itor = l.begin();
-//  for (itor; itor != l.end(); itor++) {
-//    cout << *itor << endl;
-//  }
+  Iterator<int> itor = l.begin();
+  for (itor; itor != l.end(); ++itor) {
+    cout << *itor << endl;
+  }
+  cout << "Broke for loop ...... " << endl;
   l.pop_front();
   l.pop_back();
   l.pop_back();

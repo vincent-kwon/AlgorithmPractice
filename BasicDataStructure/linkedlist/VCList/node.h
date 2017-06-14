@@ -16,26 +16,19 @@
  * =====================================================================================
  */
 
-#ifndef __ITERATOR_H__
-#define __ITERATOR_H__
+#ifndef __NODE_H__
+#define __NODE_H__
 
 #include <iostream>
-#include "node.h"
 
 using namespace std;
 
 template <typename T>
-class Iterator {
- public:
-  Iterator(Node<T>* h);
-  virtual ~Iterator();
-  Iterator<T>& operator++();
-  bool operator==(const Iterator<T>& rhs);
-  bool operator!=(const Iterator<T>& rhs);
-  T operator*();
-  Node<T>* head;
-  Node<T>* pos;
- private:
+class Node {
+ public: 
+  T value;
+  Node<T>* next;
+  Node<T>* prev;
 };
 
 #endif
