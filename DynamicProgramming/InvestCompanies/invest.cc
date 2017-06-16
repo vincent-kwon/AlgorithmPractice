@@ -23,9 +23,11 @@
  */
 
 #include <iostream>
+#include <stdio.h>
 
-#define MAX_COMPANY 3
-#define MAX_MONEY 4 
+#define MAX_COMPANY 20
+#define MAX_MONEY 300
+#define INITBASE -1
 
 int price[MAX_COMPANY+1][MAX_MONEY+1] = {
   {0, 0, 0,  0,   0},
@@ -34,22 +36,34 @@ int price[MAX_COMPANY+1][MAX_MONEY+1] = {
   {0, 3,  4,  5,  7},
 };
 
+int dp[MAX_COMPANY+1][MAX_MONEY+1] = {0,};
+
 using namespace std;
 
-int getMaxReturnTopDown(const int m, const int companyIndex, const int currentTotal) {
-  int r = -1;
-  if (companyIndex >= MAX_COMPANY || m <= 0) return currentTotal;
+int totalPrice, totalCompany;
+
+int getMaxProfit(const int m, const int c, const int companyIndex) {
+  
+  if (companyIndex == c) return price[companyIndex][m];
+
+  if (m == 0) return 0;
+
+  int &ret = dp[companyIndex][m];
+
+  if (ret != INITBASE) return ret;
+  
   for (int i = 0; i <= m; i++) {
-    r = max(r, getMaxReturnTopDown(m-i, companyIndex+1, currentTotal + price[companyIndex][i]));
+    int profit = price[companyIndex][i] + getMaxProfit(m - i, c, companyIndex + 1);
+    ret = max(ret, profit);
   }
-  return r;
+  return ret;
 }
 
-int getMaxReturnBottomUp() {
+int getMaxReturnBottomUp(const int max_money, const int max_company) {
   int m[MAX_COMPANY+1][MAX_MONEY+1] = {0, };
 
-  for (int c = 1; c <= MAX_COMPANY; c++) {
-    for (int money = 1; money <= MAX_MONEY; money++) {
+  for (int c = 1; c <= max_company; c++) {
+    for (int money = 1; money <= max_money; money++) {
       int r = -1;
       for (int toCurrent = 0; toCurrent <= money; toCurrent++) {
         int gain = price[c][toCurrent];
@@ -58,12 +72,37 @@ int getMaxReturnBottomUp() {
       m[c][money] = r;
     }
   }
-  return m[MAX_COMPANY][MAX_MONEY];
+  return m[max_company][max_money];
 }
 
 int main() {
-  int r = getMaxReturnTopDown(MAX_MONEY, 1, 0);   
-  int r2 = getMaxReturnBottomUp();
-  cout << "r:" << r << ", r2:" << r2 << endl;
+  freopen("01-1_input.txt", "r", stdin);
+
+  int test;
+  cin >> test;
+
+  while (test-- > 0) {
+    cin >> totalPrice;
+    cin >> totalCompany;
+
+    for (int c = 0; c <= MAX_COMPANY; c++) {
+      for (int i = 0; i <= MAX_MONEY; i++) {
+        dp[c][i] = INITBASE;
+      }
+    }
+
+    for (int i = 1; i <= totalPrice; i++) {
+      int tmpPrice;
+      cin >> tmpPrice;
+      for (int c = 1; c <= totalCompany; c++) {
+        cin >> price[c][i];
+      }
+    }
+
+    int r = getMaxProfit(totalPrice, totalCompany, 1);   
+    int r2 = getMaxReturnBottomUp(totalPrice, totalCompany);
+    cout << "r:" << r << ", r2:" << r2 << endl;
+  }
   return 0;
+  
 }

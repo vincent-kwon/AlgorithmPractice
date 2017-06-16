@@ -106,6 +106,28 @@ int dikstra(int start) {
   return 0;
 }
 
+void dikstra2(int start) {
+  int min;
+  int i,j,v;
+  int visited[V_SIZE] = {0, };
+  Dik[start] = 0;
+  for (i = 1; i <= V; i++) {
+    min = VC_MAX;
+    for (j = 1; j <= V; j++) {
+      if (visited[j] == 0 && min > Dik[j]) {
+        min = Dik[j];
+        v = j;
+      }
+    }
+    visited[v] = 1;
+    for (j = 1; j <= V; j++) {
+      if (Dik[j] > Dik[v] + Map[v][j]) {
+        Dik[j] = Dik[v] + Map[v][j];
+      }
+    }
+  } 
+}
+
 int main() {
   freopen("input.txt", "r", stdin);
   int test;
@@ -140,7 +162,7 @@ int main() {
     // add 0 to all House
     for (int i = 0; i < M; i++) Map[0][F_array[i]] = 0;
 
-    dikstra(0);
+    dikstra2(0);
 
     int ret = 0;
 

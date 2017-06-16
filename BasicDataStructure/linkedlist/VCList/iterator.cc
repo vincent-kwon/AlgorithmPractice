@@ -23,7 +23,7 @@
 using namespace std;
 
 template <typename T>
-Iterator<T>::Iterator(Node<T>* h) : head(h), pos(h) {
+Iterator<T>::Iterator(shared_ptr<Node<T>> h) : head(h), pos(h) {
   
 }
 
@@ -58,7 +58,7 @@ T Iterator<T>::operator*() {
 
 template <typename T>
 Iterator<T>:: ~Iterator() {
-  cout << "Destructor" << endl;
+  //cout << "Destructor" << endl;
 }
 
 template class Iterator<int>;

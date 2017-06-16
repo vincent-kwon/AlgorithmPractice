@@ -19,6 +19,7 @@
 #ifndef __vclist_h__
 #define __vclist_h__
 #include <iostream>
+#include <mutex>
 #include "iterator.h"
 
 using namespace std;
@@ -44,8 +45,9 @@ class vclist {
   // add (lambda enabled)
   // subclassing vclist so it can add top, add, and disable front (is it possible??? polymophism) 
   // iterator
-  Node<T>* head;
-  Node<T>* tail;
+  shared_ptr<Node<T>> head;
+  shared_ptr<Node<T>> tail;
+  mutex mutex1;
   //Node<T>** itorator;
   int count;
  private:

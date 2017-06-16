@@ -27,14 +27,14 @@ using namespace std;
 template <typename T>
 class Iterator {
  public:
-  Iterator(Node<T>* h);
+  Iterator(shared_ptr<Node<T>> h);
   virtual ~Iterator();
   Iterator<T>& operator++();
   bool operator==(const Iterator<T>& rhs);
   bool operator!=(const Iterator<T>& rhs);
   T operator*();
-  Node<T>* head;
-  Node<T>* pos;
+  shared_ptr<Node<T>> head;
+  shared_ptr<Node<T>> pos;
  private:
 };
 

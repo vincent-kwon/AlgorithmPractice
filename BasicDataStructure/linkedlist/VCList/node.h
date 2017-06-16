@@ -20,6 +20,7 @@
 #define __NODE_H__
 
 #include <iostream>
+#include <memory>
 
 using namespace std;
 
@@ -27,8 +28,11 @@ template <typename T>
 class Node {
  public: 
   T value;
-  Node<T>* next;
-  Node<T>* prev;
+  virtual ~Node() {
+  	cout << "Node destructor : " << value << endl;
+  }
+  shared_ptr<Node<T>> next;
+  shared_ptr<Node<T>> prev;
 };
 
 #endif
