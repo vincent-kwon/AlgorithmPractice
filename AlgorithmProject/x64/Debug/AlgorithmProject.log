@@ -1,0 +1,4 @@
+﻿  main.cc
+c:\development\algorithmpractice\basicdatastructure\tree\main.cc(94): warning C4715: 'Tree<int>::Find': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  AlgorithmProject.vcxproj -> C:\development\AlgorithmPractice\x64\Debug\AlgorithmProject.exe
+  AlgorithmProject.vcxproj -> C:\development\AlgorithmPractice\x64\Debug\AlgorithmProject.pdb (Partial PDB)
