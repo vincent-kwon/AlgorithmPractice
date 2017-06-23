@@ -433,8 +433,11 @@ int main() {
       }
     }
   }
- 
-  // intersect
-  // union 
+
+  // after intersection, sell those cars
+  //   [TODO] should be able to delete those cars easily
+  // [TODO] if delete before confirm, rollback take too much time (but this rarely happens so it is reasonable approach)
+  // if delete after confirm, need to revisit all nodes again in hashes so it is not good 
+  // [TODO] rollback if needed, just re-enter those record for each hash bucket
   return 0; 
 }
