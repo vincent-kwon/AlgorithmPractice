@@ -144,6 +144,9 @@ class PriceRangeHash {
  
 #endif
 
+// 23 minutes to complete it
+// extends to search for all four types
+//
 #include <iostream>
 #include <vector>
 #include <list>
@@ -197,28 +200,31 @@ class PriceRangeHash {
     }
   }
 
-  void searchAll(int start, int end) {
+  vector<Record*> searchAll(int start, int end) {
     int sb = getBucketNumber(start);
     int eb = getBucketNumber(end);
     
-    int tmp = sb; 
+    int tmp = sb;
+    vector<Record*> result;
+ 
     while (tmp <= eb) {
       if (tmp == sb)  {
         for (auto v : buk[tmp]) {
-          if (v->price_ >= start) cout << v->price_ << endl;
+          if (v->price_ >= start) result.push_back(v); //cout << v->price_ << endl;
         }
       }
       else if (tmp == eb) {
         for (auto v : buk[tmp]) {
-          if (v->price_ <= end) cout << v->price_ << endl;
+          if (v->price_ <= end) result.push_back(v); //cout << v->price_ << endl;
           else break;
         }
       }
       else {
-        for (auto v : buk[tmp]) cout << v->price_ << endl;
+        for (auto v : buk[tmp]) result.push_back(v); //cout << v->price_ << endl;
       }
       tmp++; 
     } 
+    return result;
   }
 
   void print() {
@@ -238,6 +244,156 @@ class PriceRangeHash {
   PriceRangeHash& operator=(const PriceRangeHash& rhs) = delete;
 };
 
+
+class AgeRangeHash {
+ public:
+  AgeRangeHash(int max, int unit) : max_(max), unit_(unit) {
+    buk_num_ = max / unit + 1;
+    buk = new list<Record*>[buk_num_];
+  }
+  virtual ~AgeRangeHash() {
+
+  }
+  int getBucketNumber(int value) {
+    return value / unit_;
+  }
+
+  void add(Record *r) { 
+    int value = r->age_;
+    int toadd = getBucketNumber(r->age_);
+    list<Record*>::iterator itor = buk[toadd].begin();
+    for (itor; itor != buk[toadd].end(); itor++) {
+      Record* tmp = *itor;
+      if (tmp->age_ <= value) {
+        continue;
+      }
+      else {
+        buk[toadd].insert(itor, r);
+        break;
+      }
+    }
+    if (itor == buk[toadd].end()) {
+      buk[toadd].push_back(r);
+    }
+  }
+
+  vector<Record *> searchAll(int start, int end) {
+    int sb = getBucketNumber(start);
+    int eb = getBucketNumber(end);
+    vector<Record*> result;
+    int tmp = sb; 
+    while (tmp <= eb) {
+      if (tmp == sb)  {
+        for (auto v : buk[tmp]) {
+          if (v->age_ >= start) result.push_back(v);//cout << v->age_ << endl;
+        }
+      }
+      else if (tmp == eb) {
+        for (auto v : buk[tmp]) {
+          if (v->age_ <= end) result.push_back(v);// cout << v->age_ << endl;
+          else break;
+        }
+      }
+      else {
+        for (auto v : buk[tmp]) result.push_back(v); //cout << v->age_ << endl;
+      }
+      tmp++; 
+    } 
+    return result;
+  }
+
+  void print() {
+    for (int i = 0; i < buk_num_; i++) {
+      for (auto v : buk[i]) {
+        cout << v->age_ << endl; 
+      }
+    }
+  }
+
+ private: 
+  int max_;
+  int unit_;
+  int buk_num_;
+  list<Record*> *buk;
+  AgeRangeHash() = delete;
+  AgeRangeHash& operator=(const AgeRangeHash& rhs) = delete;
+};
+
+class SexRangeHash {
+ public:
+  SexRangeHash(int max, int unit) : max_(max), unit_(unit) {
+    buk_num_ = max / unit + 1;
+    buk = new list<Record*>[buk_num_];
+  }
+  virtual ~SexRangeHash() {
+
+  }
+  int getBucketNumber(int value) {
+    return value / unit_;
+  }
+
+  void add(Record *r) { 
+    int value = r->sex_;
+    int toadd = getBucketNumber(r->sex_);
+    list<Record*>::iterator itor = buk[toadd].begin();
+    for (itor; itor != buk[toadd].end(); itor++) {
+      Record* tmp = *itor;
+      if (tmp->sex_ <= value) {
+        continue;
+      }
+      else {
+        buk[toadd].insert(itor, r);
+        break;
+      }
+    }
+    if (itor == buk[toadd].end()) {
+      buk[toadd].push_back(r);
+    }
+  }
+
+  vector<Record*> searchAll(int start, int end) {
+    int sb = getBucketNumber(start);
+    int eb = getBucketNumber(end);
+    vector<Record*> result; 
+    int tmp = sb; 
+    while (tmp <= eb) {
+      if (tmp == sb)  {
+        for (auto v : buk[tmp]) {
+          if (v->sex_ >= start) result.push_back(v);//cout << v->sex_ << endl;
+        }
+      }
+      else if (tmp == eb) {
+        for (auto v : buk[tmp]) {
+          if (v->sex_ <= end) result.push_back(v); //cout << v->sex_ << endl;
+          else break;
+        }
+      }
+      else {
+        for (auto v : buk[tmp]) result.push_back(v); // cout << v->sex_ << endl;
+      }
+      tmp++; 
+    } 
+    return result;
+  }
+
+
+  void print() {
+    for (int i = 0; i < buk_num_; i++) {
+      for (auto v : buk[i]) {
+        cout << v->sex_ << endl; 
+      }
+    }
+  }
+
+ private: 
+  int max_;
+  int unit_;
+  int buk_num_;
+  list<Record*> *buk;
+  SexRangeHash() = delete;
+  SexRangeHash& operator=(const SexRangeHash& rhs) = delete;
+};
+
 int main() {
   PriceRangeHash pr(7000, 2000); 
   cout << "expect 0: " << pr.getBucketNumber(0) << endl;
@@ -245,14 +401,40 @@ int main() {
   cout << "1: " << pr.getBucketNumber(2000) << endl;
   cout << "1: " << pr.getBucketNumber(3000) << endl;
   cout << "3: " << pr.getBucketNumber(7000) << endl;
-  pr.add(new Record(19, 1, 500, 0));
-  pr.add(new Record(29, 2, 999, 0));
-  pr.add(new Record(35, 3, 2000, 1));
-  pr.add(new Record(32, 4, 4000, 0));
-  pr.add(new Record(40, 5, 5000, 1));
-  pr.add(new Record(50, 6, 7000, 0 ));
-
-  pr.searchAll(999, 5001);
-//  pr.print();
+  Record* tmp;
+  pr.add(tmp = new Record(19, 1, 500, 0));
+  AgeRangeHash ar(100, 10);
+  SexRangeHash sr(2,1);
+  ar.add(tmp);
+  sr.add(tmp);
+  pr.add(tmp = new Record(29, 2, 999, 0));
+  ar.add(tmp);
+  sr.add(tmp);
+  pr.add(tmp = new Record(35, 3, 2000, 1));
+  ar.add(tmp);
+  sr.add(tmp);
+  pr.add(tmp = new Record(32, 4, 4000, 0));
+  ar.add(tmp);
+  sr.add(tmp);
+  pr.add(tmp = new Record(40, 5, 5000, 1));
+  ar.add(tmp);
+  sr.add(tmp);
+  pr.add(tmp = new Record(50, 6, 7000, 0 ));
+  ar.add(tmp);
+  sr.add(tmp);
+  vector<Record*> r1 = pr.searchAll(999, 5001);
+  vector<Record*> r2 = ar.searchAll(6, 40);
+  vector<Record*> r3 = sr.searchAll(0,0);
+  
+  for (auto v1 : r1) {
+    for (auto v2 : r2) {
+      for (auto v3 : r3) {
+        if (v1 == v2 && v2 == v3) cout << v1->price_ << ", " << v1->age_ << ", " << v1->sex_ << endl;
+      }
+    }
+  }
+ 
+  // intersect
+  // union 
   return 0; 
 }
