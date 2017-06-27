@@ -38,17 +38,12 @@ int dt[NODE_NUM] = {0, INF, INF, INF, INF};
 //
 int main() {
   for (int i = 0; i < NODE_NUM; i++) {
-    for (int adj = 0; adj < NODE_NUM; adj++) {
-      if (m[i][adj] != 0) { // for convenience, consider 0 means no connect
-        if (dt[adj] > (dt[i] + m[i][adj])) {
-          cout << "update [" << adj << "] from " << dt[adj] << ", to " << dt[i]+m[i][adj] << endl;
-          dt[adj] = dt[i] + m[i][adj];
-        }
+    for (int j = 0; j < NODE_NUM; j++) {
+      if (m[i][j] != 0 && (dt[j] > (dt[i] + m[i][j]))) {
+        dt[j] = dt[i] + m[i][j];
       }
-    }    
+    }
   }
-
- 
-  for (int i = 0; i < NODE_NUM; i++) cout << "dis[" << i << "] = " << dt[i] << endl; 
-  return 0; 
+  for (int i = 0; i < NODE_NUM; i++) cout << dt[i] << endl;
+  return 0;
 }
