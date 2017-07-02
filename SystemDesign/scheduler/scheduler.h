@@ -19,6 +19,8 @@
 #ifndef SCHEDULER_H
 #define SCHEDULER_H
 
+#define THREAD_STACKSIZE 1024
+
 typedef enum {
   TASK_READY = 0,
   TASK_RUN,

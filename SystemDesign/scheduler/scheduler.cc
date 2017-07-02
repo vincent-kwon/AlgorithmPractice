@@ -111,6 +111,7 @@ void thread_switch() {
   asm("movl %esp, spsave");
 
   gh_sch.running_task->sp = spsave;
+
   scheduler();
 
   sptmp = gh_sch.running_task->sp;
