@@ -1,0 +1,7 @@
+bitmap has width 11 pixels, height 11 pixels, palette: 2colors, and more colors 
+
+2 color just need 1 pixel, 
+
+more color need 256 (8 bits), or 32 bits (8-8-8-alpha)
+
+optimize by run-length encoding: (TODO)

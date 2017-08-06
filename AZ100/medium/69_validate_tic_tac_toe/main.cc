@@ -38,7 +38,7 @@ bool isCWin(char *board, char c) {
         board[win[i][0]] == c) return true;
   return false;
 }
-
+// memo: understand exact winning case (order and numbers)
 bool isValid(char board[9]) {
   int oCount = 0;
   int xCount = 0;

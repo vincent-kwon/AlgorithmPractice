@@ -19,7 +19,7 @@
 #include <iostream>
 #include <thread>
 #include <mutex>
-#include <condition_variable>
+#include <condition_variable> // last_visit: condition variable
 #include <unistd.h>
 
 using namespace std;
@@ -33,8 +33,8 @@ int main()  {
       int count = 10;
 	  while (true) {
         cout << "[pdd] entering lock " << endl;
-		unique_lock<mutex> lock(mMutex);
-		mCondvar.notify_all();
+		unique_lock<mutex> lock(mMutex); // last_visit: unique_lock<mutex> lock(mMutex); 
+		mCondvar.notify_all(); // last_visit: m.nofity_all
 		count--;
 		if (count < 0) break;
 		lock.unlock();
@@ -46,7 +46,7 @@ int main()  {
 	  while (true) {
         cout << "[css] condwait.wait" << endl;
 		unique_lock<mutex> lock(mMutex);
-  	    mCondvar.wait(lock);
+  	    mCondvar.wait(lock); // last_visit: condiva.wait(mutex)
   	    // if got here, notified
 		cout << "[css] lock.unlock(); .... " << endl;
 		cout << "[css] Consume:: take care of queue exclusively .... " << endl;
@@ -55,5 +55,5 @@ int main()  {
   th1.join();
   th2.join();
   return 0;
-}
+}:
 

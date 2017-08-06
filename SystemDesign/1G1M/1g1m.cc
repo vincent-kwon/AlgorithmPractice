@@ -39,7 +39,7 @@ void swap(int& a, int& b)
   b = tmp;
 }
 void quick_sort(const int startIndex, const int endIndex, int* array) {
-  if (startIndex >= endIndex) return;
+  if (startIndex >= endIndex) return; // memo
 
   int endOfSmallIndex = startIndex - 1;
   int size = endIndex - startIndex + 1; 
@@ -53,8 +53,8 @@ void quick_sort(const int startIndex, const int endIndex, int* array) {
   }
   int mid = endOfSmallIndex + 1;
   swap(array[mid], array[endIndex]); 
-  quick_sort(startIndex, mid - 1, array); // if all big end < start
-  quick_sort(mid + 1, endIndex, array); // if all small start > end
+  quick_sort(startIndex, mid - 1, array); // revisit: if all big end < start
+  quick_sort(mid + 1, endIndex, array); // revisit: if all small start > end
 }
 
 int main() {
@@ -65,12 +65,12 @@ int main() {
 
   ram = new int[num_of_data_in_memory];
 
-  if (ram == NULL) throw bad_alloc();
+  if (ram == NULL) throw bad_alloc(); //last_visit:
   
   for (int i = 0; i < num_of_chunk ; i++) {
     ifstream infile;
-    stringstream ss;
-    ss << "sub_" << i << ".txt";
+    stringstream ss; // last_visit: stringstream ss; 
+    ss << "sub_" << i << ".txt"; // last_visit: samsung ss go <<<
     infile.open(ss.str());
     //if (infile.fail()) cout << "failed..." << endl;
     int value;

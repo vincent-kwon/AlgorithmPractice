@@ -23,14 +23,17 @@
 using namespace std;
 
 int main() {
-  ifstream inFile("file.txt");
-  ofstream outFile("out.txt", ios_base::app);
+  ifstream inFile2("name");
+  ofstream outFile2("name2", ios_base::in);
+  if (outFile2.fail()) throw invalid_argument("test");
+  ifstream inFile("file.txt"); // revisit
+  ofstream outFile("out.txt", ios_base::app); // revisit: ios_base:app, in, out
 
-  if (inFile.fail()) {
-    throw invalid_argument("bad file name");
+  if (inFile.fail()) { // revisit
+    throw invalid_argument("bad file name"); // revisit: exceptions
   }
   int nextToken;
-  while(inFile >> nextToken) {
+  while(inFile >> nextToken) { // revisit: file read inFile returns NULL when no data available
     cout << "next: " << nextToken << endl;
     outFile << nextToken << ":";
   }

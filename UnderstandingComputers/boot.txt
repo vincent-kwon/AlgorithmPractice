@@ -1,0 +1,2 @@
+Bios: small program read data from cmos to checking initial SW,HW checking without OS and enable bootloader 
+CMOS: small system configuration db

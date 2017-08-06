@@ -54,16 +54,16 @@ int m[NODE_NUM][NODE_NUM] = {
   { 0, -2, 0,  0 } 
 };
 
-int dt[NODE_NUM] = {0, INF, INF, INF};
+int dt[NODE_NUM] = {0, INF, INF, INF}; // last_visit
 
 // TODO: negative cycle
 //
 int main() {
-  for (int node = 0; node < NODE_NUM-1; node++)
+  for (int node = 0; node < NODE_NUM-1; node++) // last_visit: order can be an issue but number of edge try will eventually get to this point
     for (int i = 0; i < NODE_NUM; i++) {
       for (int j = 0; j < NODE_NUM; j++) {
         cout << i << " -> " << j << " : m[i][j] = " << m[i][j] << " dt[j] : " << dt[j] << ", dt[i] + m[i][j] = " << (dt[i] + m[i][j]) << endl;
-        if (m[i][j] != 0 && (dt[j] > (dt[i] + m[i][j]))) {
+        if (m[i][j] != 0 && (dt[j] > (dt[i] + m[i][j]))) { // last_visit:
           dt[j] = dt[i] + m[i][j];
         }
         else cout << i << " -> " << j << " no path " << endl;

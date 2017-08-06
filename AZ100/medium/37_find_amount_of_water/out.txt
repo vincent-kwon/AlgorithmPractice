@@ -1,0 +1,3 @@
+Amount of water in jth, in irow: 0.125
+Amount of water in jth, in irow: 0.249986
+Amount of water in jth, in irow: 0.125

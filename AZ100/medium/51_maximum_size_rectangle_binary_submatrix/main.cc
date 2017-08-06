@@ -33,7 +33,7 @@ int A[ROW][COL] = {
 
 int V[ROW][COL];
 
-int getRowMax(int R[][COL], int row) {
+int getRowMax(int R[COL]) {
   stack<int> s;
   s.push(0);
   int gMax = -987654321;
@@ -41,17 +41,15 @@ int getRowMax(int R[][COL], int row) {
 
   for (j = 1; j < COL; j++) {
     int topIndex = s.top();
-    int topValue = R[row][topIndex];
-    int nowValue = R[row][j]; 
+    int topValue = R[topIndex];
+    int nowValue = R[j]; 
 
-    while (!s.empty() &&topValue > nowValue) {
+    while (!s.empty() && topValue > nowValue) {
       s.pop();
-      int size = topValue * (j-topIndex);
-      if (size > gMax) gMax = size;
+      gMax = max(gMax, topValue*(j-topIndex));
       if (!s.empty()) {
-        //cout << s.size() << endl;
         topIndex = s.top();
-        topValue = R[row][topIndex];
+        topValue = R[topIndex];
       }
     }
     s.push(j); 
@@ -60,14 +58,8 @@ int getRowMax(int R[][COL], int row) {
   while (!s.empty()) {
     int topIndex = s.top();
     s.pop(); 
-    int topValue = R[row][topIndex];
-    int size; 
-    if (s.size() == 0) {
-      size = j * topValue;
-    }
-    else {
-      size = (j - topIndex) * topValue;
-    }
+    int topValue = R[topIndex];
+    int size = (s.size() == 0)? j*topValue : (j-topIndex) * topValue;
     if (size > gMax) gMax = size;
   }
   return gMax;
@@ -87,13 +79,11 @@ int maxRectangle(int a[][COL]) {
           V[i][j] = 0;
         }
       }
-      //cout << V[i][j] << " ";
     }
-    //cout << "" << endl;
   }
 
   for (int i = 0; i < ROW; i++) {
-    int tmp = getRowMax(V, i);
+    int tmp = getRowMax(V[i]);
     if (tmp > gMax) gMax = tmp; 
   }
   return gMax;

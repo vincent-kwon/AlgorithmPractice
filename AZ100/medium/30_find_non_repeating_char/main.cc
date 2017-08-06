@@ -45,7 +45,7 @@ void process(list<int> &l, string s) {
     }
     else {
       if (inDll[target] == true) {
-        list<int>::iterator itor = find(l.begin(), l.end(), target);
+        list<int>::iterator itor = find(l.begin(), l.end(), target); // memo: list find
         if (itor != l.end()) l.erase(itor);
         repeated[target] = true;
       }

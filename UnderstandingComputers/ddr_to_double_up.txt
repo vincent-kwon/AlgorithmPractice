@@ -1,0 +1,9 @@
+Fastest cpu are limited by how fast memory feeds them data.
+
+clock spead increase was traditional way.
+
+DDR: previously a bit was written or read on  each cyle of the clock.
+     Before: chicago to newyork (here read) and go back empty
+     After: chicage to newyork (same) and go back with data to write
+
+Dual channel: another channel when Newyork has nothing to ship

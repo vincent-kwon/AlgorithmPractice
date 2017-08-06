@@ -29,7 +29,10 @@ class Sub : public A {
   virtual void Print() { cout << "Sub: " << endl; }
 };
 
+
 void pass(void* v) {
+  Sub* ss2 = static_cast<Sub*>(v);
+  ss2->A::Print();
   Sub* ss = static_cast<Sub*>(v); // memo-201706 : const_cast to remove const, reinterpret_cast to just cast (not safe)
   ss->Print();
   ss->A::Print();

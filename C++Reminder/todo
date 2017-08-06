@@ -1,0 +1,8 @@
+explicit: not allow auto conversion
+share_ptr<const XXXX> <=== why const?
+unique_ptr: return std::move(request);
+make_unique: c++14
+{ } initializer
+decltype
+unique_ptr second param
+

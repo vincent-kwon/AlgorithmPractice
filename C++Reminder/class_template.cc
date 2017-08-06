@@ -17,7 +17,16 @@
  */
 #include <iostream>
 #include <string>
+#include <sstring> 
+
 using namespace std;
+
+template<typename T>
+class SimpleData2 {
+ public: 
+  SimpleData(T&inObject);
+ protected:
+};
 
 template<typename T>
 class SimpleTemplate {

@@ -1,0 +1,61 @@
+
+4 round 50 minutes
+
+comfortable
+
+2 to 3 question coding, designing
+
+behavior 
+
+repeat the question
+
+a few technical : algoritm, hashmap, complexity, data structure.
+
+writing code cleaner code and test and edge cases
+
+don't start coding
+
+white board / piece of papers
+
+feel free ask interviewer for hint
+
+leadership principles
+
+2~3 leadership principle (why did you improvement? customer oriented)
+
+what you have learned 
+
+each interview 50 min 2~3 ask questions (example, data, avoid using "we" use "I")
+
+test cases, edge cases.
+
+amazon consumer ( based on location. different teams. team you want to work for )
+
+coding and design, object oriented 
+
+consumer (multiple team in consumer)
+
+Object-oriented language
+
+bar raiser: whoever first time one person ensure 
+
+wed ~40   7/12
+ 1 7;50
+ 2 8;30
+ 3 9;10
+ 4 9;50
+ 5 10;30
+ 6 11;10
+ 7 11:50
+ 8 12:30
+ 9  1:10
+ 10 1:50
+thurs ~50 7/13
+fri ~60   7/14
+Sat ~70   7/15
+Sun ~75   7/16
+Mon ~80   7/17
+
+
+
+

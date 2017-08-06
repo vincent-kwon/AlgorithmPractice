@@ -1,0 +1,14 @@
+Flash is different from RAM. 
+
+Control gate and floating gate charges are compared by bit sense and if more than half control is called "open" and cell represent 1.
+
+If below half, it is 0. 
+
+There is bit line and word line: control gate is connected with word line to determine word address.
+
+To change the value of cell to zero, tunneling is used. In tunneling, a current from bit line travels through floating gate transistor,
+exiting through "ground" then electrons boil off the floating gate and trapped in control gate (1) 
+
+Energy from current causes electrons to boil off the floating gate and ????  
+
+And most of all, all the trapped electrons keep even no electricity applied. 

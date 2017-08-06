@@ -1,0 +1,81 @@
+/*
+ * =====================================================================================
+ *
+ *       Filename:  range_search_hash.cc
+ *
+ *    Description:  Search query for hashes
+ *
+ *        Version:  1.0
+ *        Created:  2017년 06월 23일 07시 17분 26초
+ *       Revision:  none
+ *       Compiler:  gcc
+ *
+ *         Author:  Hobum (Vincent) Kwon (mn), hobum.kwon@gmail.com
+ *        Company:  Samsung Electornics
+ *
+ * =====================================================================================
+ */
+
+#include <iostream>
+#include <list>
+
+using namespace std;
+
+// should be able to search by range
+//
+// for example 0~999, 1000~1999, 2000~2999, 3000~3999
+// 10,000 cars
+// search query would be 900 ~ 2100
+//
+class Record {
+ public:
+  int age;
+  int name;
+  int price;
+  int sex;
+ private:
+};
+
+class PriceRangeHash {
+ public: 
+  PriceRangeHash(int max, int perSlotUnits) {
+    int numBuckets = max / perSlotUnits;
+
+    if ( max % perSlotUnits ) numBuckets++;
+
+    cout << "total buckets: " << numBuckets << endl;
+    hashBuckets = new list<Record*>[numBuckets];
+    int startPoint = 0; 
+    int endPoint = -1;
+    while (true) {
+      startPoint = endPoint + 1; 
+      cout << "enter Start: " << startPoint << endl;
+      cout << "enter End: " << endPoint << endl;
+      int endPoint = startPoint + perSlotUnits - 1;
+      if (endPoint > max) {
+        endPoint = max;
+      }
+      // add to bucket: bucket * perSlotUnit (start), end = start + perSlotUnit -1  perSlotUnits => 0(0~999), 1(1000~1999), 2(2000~2999) 
+      int bucketIndex = startPoint / perSlotUnits; 
+      cout << bucketIndex << ": " << startPoint << "~" << endPoint << endl;
+      if (endPoint == max) break;
+      // set next 
+      // -- 
+    }
+  }
+  virtual ~PriceRangeHash() {
+
+  }
+  void add(Record* record) {
+    // check price
+    // add to right hash bucket
+    // in ascending order
+  }
+ private:
+  list<Record*> *hashBuckets;
+};
+
+int main() {
+  PriceRangeHash pr(7000, 2000); 
+  return 0; 
+}

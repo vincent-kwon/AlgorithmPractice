@@ -16,6 +16,9 @@
  * =====================================================================================
  */
 
+// memo: maze of source, destination 
+//
+// Good to practice
 #include <iostream>
 
 using namespace std;

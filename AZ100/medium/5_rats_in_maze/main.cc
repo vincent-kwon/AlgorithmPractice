@@ -55,7 +55,7 @@ int visited[MAX_NUM][MAX_NUM] = {
 };
 
 
-vector<pair<int, int>> path;
+vector<pair<int, int>> path; // memo: save path in reverse order of vector (last is first) when success console write also possible
 
 bool findPath(int row, int col) {
   if (row >= MAX_NUM || col >= MAX_NUM) return false;

@@ -1,0 +1,13 @@
+2. A processor and its cache share the same 64 bit interface and controlled by bus speed.
+
+3. bus bottleneck minimizing the times a clock cycle ??
+
+4. information entered vi bus interface unit, BIU copy data to caches
+
+5. fetch/decode unit pulling in instructions from I-cache. 90% prediction 
+
+6. two ALUs to handle calculations for integer
+
+7. for floating, floating point math unit involves
+
+8. Jump execution unit when branch prediction failed.

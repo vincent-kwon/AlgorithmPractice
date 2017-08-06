@@ -171,19 +171,19 @@ int incr(int x) {
 
 int bidirectional(State start, State finish) {
   map<State, int> c;
-  queue<State> q;
+  queue<State> q; // last_visit: one queue different length
 
-  if (start == finish) return 0;
+  if (start == finish) return 0; // last_visit: start condition
 
   q.push(start); c[start] = 1;
-  q.push(finish); c[finish] = -1;
+  q.push(finish); c[finish] = -1; // last_visit: visited map with sign
 
   while (!q.empty()) {
     State here = q.front();
     q.pop();
     vector<State> adjacent = here.getAdjacent(c);
     for (int i = 0; i < adjacent.size(); i++) {
-      map<State, int>::iterator it = c.find(adjacent[i]);
+      map<State, int>::iterator it = c.find(adjacent[i]); // last_visit: map iterator itor->first, itor->second
       if (it == c.end()) {
         c[adjacent[i]] = incr(c[here]);
         q.push(adjacent[i]);

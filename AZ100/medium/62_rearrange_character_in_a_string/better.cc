@@ -32,6 +32,7 @@ struct Key {
   }
 };
 
+// memo: use heap and print and leave one turn away from the heap to guarantee not repeating 
 void rearrangeString(string str) {
   int n = str.size();
   int count[MAX_CHAR]  = {0, };

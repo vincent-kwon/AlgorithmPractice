@@ -1,0 +1,20 @@
+enormous collections of switch the computer is
+
+585 million transistors less than square inches.
+
+Registers are reserved section of transistors in the faster memory inside the microprocessor.
+
+Most PC has 32 or 64 registers
+
+Controls use electrical signals to fetch each instructions, decode it, sends another control signal to 
+ALU and.
+
+Address registers: collect contents of different addresses
+
+Program counter register:  hold next value to fetch
+
+Memory data registers: what to write on RAM in and out
+
+Accumulation registers: used for calculation
+
+

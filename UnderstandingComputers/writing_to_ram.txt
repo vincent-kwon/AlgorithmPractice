@@ -1,0 +1,13 @@
+A software sends a burst of electricity along an address line.
+
+Each addressline (if 16bit, 65532 address selectable) identifies location of a spot of a chip
+where data can be stored.
+
+Address line is like pipe and data only goes to the where address line is connected (like pipe)
+
+And it charges "capacitor" to 1 so "closed" transitor and "charge or no charge" to capacitor
+
+Reading data is same. Closed transitor for address line, get data from data line for each capacitor 
+of the address.
+
+

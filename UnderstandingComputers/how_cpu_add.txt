@@ -1,0 +1,7 @@
+Half adder: one xor to represent this bit and one and to represent carry.
+
+Full adder & half adder
+
+1 0 + 1 1 = 1 0 1 
+
+TODO:

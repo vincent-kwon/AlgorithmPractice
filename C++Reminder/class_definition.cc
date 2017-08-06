@@ -29,7 +29,7 @@ class Simple {
   virtual ~Simple();
   virtual void publicMethod();
   Simple& operator=(const Simple& rhs);
-  static const int mConstantInt = 2;
+  static const int mConstantInt = 2; // revisit
   static int sStaticInt;
  protected:
   int mProtectedInteger;
@@ -52,7 +52,7 @@ void Simple::publicMethod() {
 }
 
 Simple& Simple::operator=(const Simple& rhs) {
-  return *this;
+  return *this; // revisit: = should return *this
 }
 
 int main() {

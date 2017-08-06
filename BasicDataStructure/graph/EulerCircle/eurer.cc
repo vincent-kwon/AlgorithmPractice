@@ -79,7 +79,7 @@ int main()
     
     for (i = 0 ; i < 26; i++) 
     {
-      if (inNum[i] != outNum[i]) 
+      if (inNum[i] != outNum[i]) // last_visit: do dfs and coutn out/in if all in/out same then it is eurer circuit
       {
         isEurerCircuit = false;
         break;

@@ -1,0 +1,13 @@
+transistor is basic building block from which all microchips are built.
+It only creates binary information: 1 if current passes through, 0 if current doesn't pass through
+Combination of transitors can create logic gate (full adder) 
+
+If positive electrical is sent down one aluminum lead that runs into transitor,
+it flows to "polysilicon" and it attracts negative electrons and it bridge source and drain 
+by rushed negative electrons and it completes circuit and it represents 1.
+
+If negative charge is applied, the transitor turns off.
+
+Then how "postive" charge can flow to a silicon?
+
+

@@ -22,7 +22,7 @@
 #define INF 987544321
 using namespace std;
 
-int m[VC_MAX][VC_MAX] = {
+int m[VC_MAX][VC_MAX] = { // last_visit: map vector, previous vector 
   {0,  3,  6, 15},
   {INF, 0, -2, INF},
   {INF, INF, 0, 2},
@@ -58,9 +58,9 @@ void getFloyWarshall() {
       for (int j = 0; j < VC_MAX; j++) {
         cout << i << "," << j << "," << k << ":" << m[i][j] << "," << m[i][k] << "," << m[k][j] << endl;
         if (m[i][k] == INF || m[k][j] == INF) continue;
-        if (m[i][j] > (m[i][k] + m[k][j])) {
-          m[i][j] = m[i][k] + m[k][j];
-          p[i][j] = p[k][j];
+        if (m[i][j] > (m[i][k] + m[k][j])) { // last_visit: if small, update
+          m[i][j] = m[i][k] + m[k][j]; // last_visit: update directly
+          p[i][j] = p[k][j];           // update path to indicate what is last visit
           cout << "   swap " << endl;
         }
       }

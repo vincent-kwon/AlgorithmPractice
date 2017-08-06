@@ -1,0 +1,23 @@
+VinceOS is a small virtual machine based operating system with
+
+1. Application life-cycle handler to launch an application (main loop implementation)
+   a. multiple applications can run by scheduling policy (time slice, LRU) 
+
+2. Timer API for application library 
+
+3. Memory manager to alloc, free (garbage collect) graphics object from virtual memory (generational gc) 
+   a. to simulate dealloc object , an API to mark obsolete this object
+
+4. Window manager which create a window and manager inner graphics object (rectangle)
+   a. able to send certain events to all the overlapping area (mouse event)
+   b. able to write a text which is given with unicode table to UTF8 encoding
+   c. rectangle fill by drawRect in a inner container graphics object 
+   d. if area updated, all overlapping areas should be repainted
+
+5. Tiny FileSystem to save data non-volatile area which has a virtual cache provides with a cache policy
+   a. TODO (LRU cache)
+
+6. IPC send small command to other task (data from little-endian to big-endian, then big-endian to little-endian)
+
+
+- 

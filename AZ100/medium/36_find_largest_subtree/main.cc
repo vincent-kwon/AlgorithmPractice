@@ -16,6 +16,8 @@
  * =====================================================================================
  */
 
+// memo: good to practice
+//
 #include <iostream>
 
 using namespace std;

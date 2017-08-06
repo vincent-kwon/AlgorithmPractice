@@ -24,6 +24,9 @@
  * if  s + r > sum, then r should decrease
  * if  s + r < sum, then s should increase
  *
+ * Memo: it is about finding two elements in sorted array.
+ *       what about "N" number to form some value? 
+ *       Dynamic programming can be easiy solve
  * =====================================================================================
  */
 

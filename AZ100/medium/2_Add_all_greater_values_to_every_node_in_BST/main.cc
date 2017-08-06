@@ -52,7 +52,7 @@ bool isBst(Node* node, int& min, int& max) {
 }
 Node* root;
 
-int lastVisitSum = 0;
+int lastVisitSum = 0; // memo: this is Money Ball. Keeping track of values
 
 void reverseInorderTraverse(Node* node) { // return sum value of next big
   if (node == NULL) return;
@@ -61,7 +61,7 @@ void reverseInorderTraverse(Node* node) { // return sum value of next big
   reverseInorderTraverse(node->right);
   lastVisitSum = node->value + lastVisitSum;
   cout << "visit: " << lastVisitSum << endl;
-  node->sum = lastVisitSum;
+  //node->sum = lastVisitSum;
   reverseInorderTraverse(node->left);
 }
 /* when going right, value to get is next close node's sum

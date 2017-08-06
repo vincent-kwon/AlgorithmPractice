@@ -1,0 +1,44 @@
+/*
+ * =====================================================================================
+ *
+ *       Filename:  lcs_simple.cc
+ *
+ *    Description:  
+ *
+ *        Version:  1.0
+ *        Created:  2017년 06월 27일 05시 27분 07초
+ *       Revision:  none
+ *       Compiler:  gcc
+ *
+ *         Author:  Hobum (Vincent) Kwon (mn), hobum.kwon@gmail.com
+ *        Company:  Samsung Electornics
+ *
+ * =====================================================================================
+ */
+
+#include <iostream>
+
+using namespace std;
+
+
+int array[] = { 0, 3, 5, 1, 2, 7, 6, 9, 8 }; 
+
+int lcs(int start) {
+  int tmp;
+  int max = 1;
+
+  for (int i = start + 1 ; i < array.size(); i++) {
+    if (array[start] < array[i]) {
+      tmp = 1 + lcs(i);
+      if (tmp > max) max = tmp
+    }     
+  }
+  return max;
+}
+
+int main() {
+  int i;
+  i = lcs(0);
+  cout << i - 1 << endl;
+  return 0;
+}
