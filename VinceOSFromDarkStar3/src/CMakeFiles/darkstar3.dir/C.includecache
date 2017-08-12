@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vincent/developement/projects/DarkStar3/src/app_launcher/app_launcher_daemon.c
+unistd.h
+-
+stdlib.h
+-
+stdio.h
+-
+string.h
+-
+stdbool.h
+-
+sys/types.h
+-
+sys/socket.h
+-
+netinet/in.h
+-
+
+/home/vincent/developement/projects/DarkStar3/src/main.c
+unistd.h
+-
+stdlib.h
+-
+stdio.h
+-
+string.h
+-
+stdbool.h
+-
+

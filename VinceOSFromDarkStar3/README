@@ -1,0 +1,16 @@
+How DarkStar3 works:
+
+main process
+    |     fork
+    |------------------- System Server Daemon
+    |
+    |     fork
+    +------------------- Launcher Application --+
+    |                                           | request launch
+    |                                           |
+    |
+ Application Launcher Daemon (listening for app launch request)
+                                                |
+                                                |
+                                                +-----> launch a new app
+

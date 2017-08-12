@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/vinceos.dir/main.cc.o CMakeFiles/vinceos.dir/Process.cc.o  -o bin/vinceos -rdynamic 

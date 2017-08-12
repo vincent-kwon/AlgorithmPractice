@@ -1,0 +1,7 @@
+1. press key
+2. microcontroller detects key by current change scanning
+3. mc store scan code 1E to A into memory buffer of the keyboard
+4. mc load the number in a port connection where it can be read by Basic input out system.
+5. mc sends interrupt signal over the keyboard cable to the pc processor that a scan code is waiting
+6. BIOS reads the scan code from the keyboard port
+7. BIOS to translate to ASCII

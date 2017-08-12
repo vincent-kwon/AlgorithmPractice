@@ -1,0 +1,38 @@
+/*
+ * =====================================================================================
+ *
+ *       Filename:  rdb.h
+ *
+ *    Description:  
+ *
+ *        Version:  1.0
+ *        Created:  12/02/2013 10:56:54 PM
+ *       Revision:  none
+ *       Compiler:  gcc
+ *
+ *         Author:  Hobum (Vincent) Kwon (mn), hobum.kwon@gmail.com
+ *        Company:  Samsung Electornics
+ *
+ * =====================================================================================
+ */
+
+#ifndef _RDB_H_
+#define _RDB_H_
+
+typedef enum { RDB_NODE_BLACK, RDB_NODE_RED } rdb_color_e;
+
+/*-----------------------------------------------------------------------------
+ *  Interesting decision. Is is necessary to have a link to parent? 
+ *  If it is not required, can save 4 bytes for every node   
+ *-----------------------------------------------------------------------------*/
+typedef struct _rdb_node_s {
+        rdb_color_e color;
+        struct _rdb_node_s* left_child;
+        struct _rdb_node_s* right_child;
+        struct _rdb_node_s* parent;
+        int value;
+} rdb_node_s;
+
+#endif
+
+

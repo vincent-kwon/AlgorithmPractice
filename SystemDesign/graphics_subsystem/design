@@ -1,0 +1,36 @@
+There is a main loop.
+It controls life cycle of application.
+It is using libuv.
+
+This is applicaiton life-cycle handler.
+
+It has launch pad.
+
+It has EFL library already loaded.
+
+It actually draws something using OpenGL backend
+
+It has object tree
+
+It has wayland window
+
+Roleback mechanism
+
+Role of window manager start - back - front - stop - kill
+
+Smack (3 domain smack)
+
+Two application share one memory buffer
+
+memcpy
+
+CPU boost
+
+USB connected hardware, pressing button 
+
+Application, pressing keyboard, 
+
+Window Manager role
+
+
+

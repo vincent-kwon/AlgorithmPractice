@@ -1,0 +1,116 @@
+/* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*- */
+/* app_launcher_daemon.c  Convenience source including all other headers
+ *
+ *  Copyright 2013 vincentech corporation.
+ *
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ * 
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ *
+ */
+
+//headers
+#include <unistd.h>  //optarg 
+#include <stdlib.h>  //malloc, free
+#include <stdio.h>   //printf
+#include <string.h>  //memset
+#include <stdbool.h> //true, false
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+
+int start_app_launcher_daemon(char* server_port) {
+  int n;
+  int fd_listener;
+  int newsockfd;
+  struct sockaddr_in server_address; //address
+  //struct sockaddr_in client_address;
+  struct sockaddr client_address;
+  char buffer[256];
+  char *dummyArgsv[] = {""};
+  socklen_t len_saddr, clilen;
+  memset(&server_address, 0x00, sizeof(struct sockaddr_in));
+  memset(buffer, 0x00, sizeof(buffer));
+  printf("start app launcher daemon...\n"); 
+  /**** start listen server socket ****/  
+  //AF_INET: internet, AF_UNIX: domain, PF_NET: Protocol internet in BSD family 
+  //SOCK_STREAM, SOCK_DGRAM, SOCK_RAW
+  //IPPROTO_ID, IPPROTO_TCP, IPPROTO_UDP, IPPROTO_ICMP
+  fd_listener = socket(AF_INET, SOCK_STREAM, 0);//socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
+
+  if (fd_listener == -1) {
+    printf("[MAIN] [TCP Server] socket returns an error at line %d in file %s\n", __LINE__, __FILE__);	 
+    return -1;
+  }
+  
+  //all server address which will be sent in big endian format
+  //htons, htonl <---> ntohs, ntonl
+  server_address.sin_family = AF_INET;
+  server_address.sin_addr.s_addr = htonl(INADDR_ANY);
+  server_address.sin_port = htons(atoi(server_port));
+  len_saddr = sizeof(server_address);
+
+  if (bind(fd_listener, (struct sockaddr *)&server_address, len_saddr) < 0) {
+    printf("[MAIN] [TCP Server] bind returns an error at line %d in file %s\n", __LINE__, __FILE__);	
+    return -1;
+  }	
+
+  listen(fd_listener, 5/*LISTEN_BACKLOG*/);
+  while(1) {
+  printf("listen app launcher daemon...\n");
+    newsockfd = accept(fd_listener, (struct sockaddr *)&client_address, &clilen);
+    if (newsockfd < 0) {
+      return -1;
+    }
+    bzero(buffer,256);
+    n = read(newsockfd,buffer,255);
+    if (n < 0) {
+      printf("Error in read..Just continue.\n");
+      close(newsockfd);
+      continue;
+    }
+
+    if (strcmp(buffer, "new app request") == 0) {
+      n = write(newsockfd,"ACK: new app request",strlen("ACK: new app request"));
+      bzero(buffer,256);
+      n = read(newsockfd,buffer,255);
+      if (n < 0) {
+        printf("[TCP Server] socket read returns an error at line %d in file %s\n", __LINE__, __FILE__);
+	close(newsockfd);
+        continue;
+      }
+      //now need to fork and exe the requested app. 
+      int new_app_process_id = fork();
+      if (new_app_process_id == 0) {
+        close(newsockfd);
+      }      
+      else if (new_app_process_id < 0) {
+        printf("Something wrong in fork for launcher app\n");
+        close(newsockfd);
+        continue;
+      }
+      else {
+	printf("New process is received value %d\n", new_app_process_id);
+	printf("[I am new born process and about to lauch %s in pid(%d)\n", buffer, getpid());
+	execv(buffer,dummyArgsv );
+        continue;
+      }	
+    }
+    else {
+      printf("[TCP Server] socket request is not recognizable (%s) at line %d in file %s\n", 
+							buffer, __LINE__, __FILE__);				
+      close(newsockfd);
+      continue;
+    }
+  } // while loop ends	
+  close(fd_listener); // server socket ends.		
+}
+

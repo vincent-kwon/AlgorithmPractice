@@ -1,0 +1,25 @@
+All atoms are 
+- positively charged particles called "protons" at the center
+- cloud of negatively charged called "electrons" surround "necleus" (proton and neutron with no electrical charge)
+
+In some atoms, such as copper and aluminum, the attraction is weak between proton and electrons so electrons 
+jump freely from one atom to another and this move is electricity.
+
+Nonconductive means not moving well such as rubber are insulators.
+
+Semiconductors are on/off by condition
+
+When electricity is moving through a wire, it creates an electromagnetic fields that surround the wire.
+
+Electromagnetism is a form of energy that spreads in the form of waves. Light, radio, microwases, tv signals are example
+of electromagnetism.
+
+an object near electromagnetic fields are influenced by the presence, proximity, shape, composition moving through the fields
+
+Electromagnetic radiation spectrum beginning of longest radio waves, to extreme short of gamma rays : low further, 
+
+when coil induces a magnetic field in the core, move iron particles in the disk positive, positive, negative aligned and
+it is called one band and two bands represents 1 bit. If particles in both bands are aligned in the same direction 0.
+if different 1.
+
+

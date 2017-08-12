@@ -1,0 +1,44 @@
+# docker based operating system with
+ - Features
+   . Context switching and CPU scheduling
+     - LRU scheduling, RoundRobin scheduling provided 
+     - Each application has one folder to save icon for this application 
+   . Has system daemon
+     - some system daemons are launched which VinceOS is turned on
+       . Some of daemons provide client level APIs to communicate with 
+       . Names are SysDaemon1, SysDaemon2
+   . Each process request memory to VinceKernel
+     - Physical 1G memory
+     - Each has 4G virtual memory
+     - Shared memory only allowed for VinceOS processes
+   . Each process request Window to show apps to display window
+     - VinceKernel needs to manage Window stack and home button key will go
+       launcher app always
+     - If visible, then when cpu scheduled, running its app continuously.
+     - When window is closed, no more handle needed
+     - VinceKernel needs to manage concurrency issue with Semaphore
+   . HW interrupt handler for fake pointing device
+     - This USB based HW device is responsible to "StrangeHWEvent" so apps can 
+       received signal and this event is delivered (x, y number within 1280x7200)
+     - If App is not visible, this event should be delivered or not (option)
+   . Filesystem (virtual file system) (B-tree based)
+     - 
+   . VinceOS has privilege system to control certain feature (TODO)
+     -   
+ - Build
+   . CMake / Ninja to build
+   . Need automated system to test 
+   . Need binary drop whenever new git update happens
+
+ - Source 
+   . Github to host this project
+
+- Binary 
+   . Docker image to deploy to Ubuntu
+
+- Document
+   . Markdown to describe project
+
+ - Applications
+   . One of its application is vision recognition
+   . One of its application is streaming video player

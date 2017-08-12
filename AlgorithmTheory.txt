@@ -1,0 +1,28 @@
+1. O(g(n)) = { f(n) | Ec > 0, n0 > 0, s.t. Vn >= n0, f(n) <= cg(n) }  
+  - Definition: For all n > n0, there exist positive number c and n0 which satisfiy f(n) <= cg(n) }
+  - Example: f(n) => n2  c = 2   n2 <= 2(n2), n >= 1 
+  - Range:  O(n of 2) = n of 2, 3 n of 2 - 50, 5n+15, 2nlogn+3
+  - Distance upper bound, at most
+
+2. Omega (g(n)) = { f(n) | EC > 0, n0 >0, s.t. Vn >= n0, cg(n) <= f(n) }
+  - Definition: For all n > n0, there exist c and n0 which satisfy cg(n) <= f(n) 
+  - Example: 5n2 <= Omega(n2) 
+  - Range: Omega(n of 2) = n of 3, n of 2, n of 4
+  = Distance lower bound, at least
+
+3. Merge sort analysis:
+
+  T(n) <= 2T(n/2) + n
+       <= 2(2T(n/4) + n/2) + n => 2of2T(n/2of2) + 2n
+       <= 2of3T(n/2of3) + 3n
+       ...
+       <= 2 of k * T (n / 2 of k) + kn
+       n = 2 of k , then
+       n * T(1) + n * logn = n * log n
+
+4. Strongly connected 
+  1) DFS earliest completed ordering 1 -> 2 -> 
+  2) All nodes must be visited (do not miss left-over)
+  3) Reverse all edges (why?)
+  4) from 10 to 1, do DFS and find no more, separate it
+ 

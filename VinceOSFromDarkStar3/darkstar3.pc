@@ -1,0 +1,14 @@
+# Package Information for pkg-config
+
+prefix=
+exec_prefix=/usr
+libdir=
+includedir=
+
+Name: darkstar3
+Description: 
+Version: 
+Requires: dbus-glib-1 
+Libs: -L${libdir} -ldarkstar3
+Cflags: -I${includedir}
+

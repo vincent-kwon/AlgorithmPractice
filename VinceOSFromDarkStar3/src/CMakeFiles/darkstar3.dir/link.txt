@@ -1,0 +1,1 @@
+/usr/bin/gcc      CMakeFiles/darkstar3.dir/main.c.o CMakeFiles/darkstar3.dir/app_launcher/app_launcher_daemon.c.o  -o darkstar3 -rdynamic 
