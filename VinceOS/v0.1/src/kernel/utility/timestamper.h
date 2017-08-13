@@ -20,8 +20,25 @@
  * =====================================================================================
  */
 #pragma once
+
+#include <stdio.h>
+#include <sys/time.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include <iostream>
 #include <map>
+
+#define BUFFSIZE 1024
+#define PATHSIZE 128
+
+typedef struct _timestamp_record {
+  struct timeval* start_time;
+  char start_location[PATHSIZE];
+  struct timeval* end_time;
+  char end_location[PATHSIZE];	
+  long long duration;
+} timestamp_record;
 
 class Timestamper {
  public:
@@ -31,6 +48,6 @@ class Timestamper {
   void printAll();
   void releaseAll();
   Timestamper();
-  std::map<std::string, long long> timemap;
+  std::map<std::string, timestamp_record*> timemap;
   virtual ~Timestamper();
 };

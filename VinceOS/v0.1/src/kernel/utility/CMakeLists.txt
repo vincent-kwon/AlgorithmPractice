@@ -3,6 +3,7 @@ project(timstamper)
 set(CMAKE_LIB_DIR ${CMAKE_SOURCE_DIR}/lib)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_LIB_DIR})
 set(TARGET_LIB_NAME "timestamper")
+ADD_DEFINITIONS("-std=c++0x")           # accept C++11x standard
 include_directories("${PROJECT_SOURCE_DIR}/include")
 #add_executable(vinceos ${PROJECT_SOURCE_DIR}/main.cc ${PROJECT_SOURCE_DIR}/Process.cc)
 add_library(${TARGET_LIB_NAME} SHARED ${PROJECT_SOURCE_DIR}/timestamper.cc)
