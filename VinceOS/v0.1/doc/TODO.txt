@@ -1,0 +1,9 @@
+1. [common] Use {top}/lib as common libraries location
+2. [common] Use {top}/bin as final executable location
+3. [scheduler] use shared memory only accessible to children and parent
+4. [scheduler] use semaphore to produce (bitblit to frame buffer is done, now allow consumer to operate) / consumer (copy
+   its own buffer (canvas) to shared canvas => what is shared canvas copy takes too much time to ??? overlapping with 
+   next shared canvas copy to framebuffer???
+
+   In opposite thought, maybe producer is each application. and if multiple applications are visible,
+   when one app view is modified, then after it finished, send consumer to consume (in this case 

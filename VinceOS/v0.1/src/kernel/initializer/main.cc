@@ -22,6 +22,7 @@
 #include <string.h>
 #include "Process.h"
 #include <stdio.h>
+#include "../utility/timestamper.h"
 
 using namespace std;
 
@@ -37,7 +38,13 @@ int main() {
   char child_message[256] = "goodbye";
   void * shmem = create_shared_memory(128);
   cout << "size of char* : " << sizeof(child_message) << endl;
+
+  Timestamper ts;
+
+  ts.enter("1");  
   memcpy(shmem, parent_message, 256);
+  ts.exit("1");
+
   int pid = fork();
   if (pid == 0) {
     cout << "child read: " << static_cast<char*>(shmem) << endl;
