@@ -52,7 +52,7 @@ int main() {
   }
   else {
     //cout << "parent read: " << static_cast<char*>(shmem) << endl;
-    printf("Parent read: %s\n", shmem);
+    printf("Parent read: %s\n", (char*)shmem);
     sleep(1);
     cout << "After 1s parent read: " << static_cast<char*>(shmem) << endl;
   }
