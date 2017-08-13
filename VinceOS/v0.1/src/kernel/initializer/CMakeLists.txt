@@ -2,5 +2,10 @@ cmake_minimum_required(VERSION 2.8.8)
 project(vinceos)
 set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+set(TARGET_LIB_NAME "vinceos")
 include_directories("${PROJECT_SOURCE_DIR}")
-add_executable(vinceos ${PROJECT_SOURCE_DIR}/main.cc ${PROJECT_SOURCE_DIR}/Process.cc)
+#add_executable(vinceos ${PROJECT_SOURCE_DIR}/main.cc ${PROJECT_SOURCE_DIR}/Process.cc)
+add_library(${TARGET_LIB_NAME} SHARED ${PROJECT_SOURCE_DIR}/main.cc ${PROJECT_SOURCE_DIR}/Process.cc)
+
+SET_TARGET_PROPERTIES(${TARGET_LIB_NAME} PROPERTIES
+    COMPILE_FLAGS -fPIC)

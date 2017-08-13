@@ -21,7 +21,10 @@ using namespace std;
 
 int main() {
   Process p;
-  cout << "[main] start.... " << endl;
+  cout << "[main] what main system init may need ?? " << endl;
+  cout << "Initialize scheduler/process manager... " << endl;
+  cout << "Initialize memory manager... " << endl;
+  cout << "Initialize file manager... " << endl;
   p.info();
   cout << "[main] end...." << endl;
   return 0;
