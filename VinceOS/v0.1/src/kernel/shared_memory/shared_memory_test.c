@@ -17,7 +17,7 @@ int main ()
   printf("shared memory attached at address %p\n", shared_memory);
 
   // get size via shmid_ds (data structure) 
-  shmctl (segment_id, IPC_STAT, &shmbuffer);
+  shmctl(segment_id, IPC_STAT, &shmbuffer);
   segment_size = shmbuffer.shm_segsz;
   printf("segment size: %d\n", segment_size);
 
@@ -28,7 +28,7 @@ int main ()
   shmdt(shared_memory);
 
   // can attach to different ID 0x5000000
-  shared_memory = (char*) shmat (segment_id, (void*) 0x5000000, 0);
+  shared_memory = (char*) shmat(segment_id, (void*) 0x5000000, 0);
   printf("shared memory reattached at address %p\n", shared_memory);
   printf("%s\n", shared_memory);
 
