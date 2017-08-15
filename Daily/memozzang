@@ -1,3 +1,26 @@
-8/15/2017 sem_t sem_get sem_ctrl sem_post sem_wait sem_destroy?
+8/15/2017 
+semaphore:
+semaphore to shared memory, multiprocess, -2 to request alloc, +2 return after use, if -2 is waiting and something to +3, then automatically executed, sem_t sem_get sem_ctrl sem_post sem_wait sem_destroy, mmap(NULL?, size, protection, visibility, 0?, 0?), munmap(pointer, size),
 
+c++exception:
+const char*, const noexcept, *this, stdexcept, exception what(), runtime_error, invalid_argument, bad_alloc, overflow_error, underflow_error
+
+Arduino:
+1. void setup(); void loop(); Serial.println(val); Serial.begin(9600), 
+2. LED Connect: long-13, short-ohm-ground, pinMode(14, OUTPUT), digitalWrite(13, HIGH) // 5V, digitalWrite(13, low) // 0v, delay(millisecond),
+3. LED bright-dark: analogWrite(13, 0 ~ 255) // 255 max, analogWrite send current via PWM
+4. How to adjust signal width
+       _           _
+     PWM: _| |_________| |__ (250 Hz) : 1 sec, 250 times (per 1/250 sec)
+  
+          |-----------| (from up to next up) takes 4ms (1/250)
+
+            _     _
+          _| |___| |___ (500 Hz) : 1 sec, 500 times (per 1/500 sec) 
+
+5. DUTY Rate: another way of adjust signal, how much HIGH kept of total: 1 means all high
+6. In arduinio, interrupts (for example timer interrupts ever 1/1000 sec) call functions by HW event.
+7. Timer: #include<TimerOne.h>, Timer1.initialize(100000); // timer interval to 1/10 sec, Timer1.attachInterrupt(timerIsr);
+8. interrupt: noInterrupts(); interrupts();
+      
 
