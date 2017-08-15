@@ -22,5 +22,8 @@ Arduino:
 6. In arduinio, interrupts (for example timer interrupts ever 1/1000 sec) call functions by HW event.
 7. Timer: #include<TimerOne.h>, Timer1.initialize(100000); // timer interval to 1/10 sec, Timer1.attachInterrupt(timerIsr);
 8. interrupt: noInterrupts(); interrupts();
-      
+9. when to connect to ground? when to connect to 5v? when to Ohm? For LED, long to VCC/5v, short to GND/0v, LED needs wit ohm directly
+   Bigger ohm, currenct from 5V to GND diminish and LED will be darker
+10. Bread pan: long to ohm to 5V, short to GND
+11. LED needs lowest ohm       
 
