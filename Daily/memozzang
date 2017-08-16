@@ -26,4 +26,9 @@ Arduino:
    Bigger ohm, currenct from 5V to GND diminish and LED will be darker
 10. Bread pan: long to ohm to 5V, short to GND
 11. LED needs lowest ohm       
+12. When analogWrite is called, it sends current to PWM Pin, each pin has fixed PWM Hz, if 250 HZ then one is 1/250 sec, 250 timer per 1 sec
+13. Dutibi: analogWrite decides dutibi. PWM is already fixed: 980 Hz thus 1 per 1/980 sec or 490 Hz thus 1 per 1/490 sec. 
+    if Dutibi is zero, analogWrite(0), ________________________
+    if Dutibi is 100%, analogWrite(255), -----------------------------------
+    if Dutibi is 75%, for 75% of Cycle is High (thus 75% of max brightness)
 
