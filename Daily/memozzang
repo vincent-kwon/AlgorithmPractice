@@ -31,4 +31,6 @@ Arduino:
     if Dutibi is zero, analogWrite(0), ________________________
     if Dutibi is 100%, analogWrite(255), -----------------------------------
     if Dutibi is 75%, for 75% of Cycle is High (thus 75% of max brightness)
-
+14. DC Motor: B(GND)R(5V)Y(9) <== doesn't matter with Y, it just runs ok
+15. Servo Motor: B(GND)R(5V)Y(9) <== to adjust angle of servo
+16. delay(1000) <= 1 sec
