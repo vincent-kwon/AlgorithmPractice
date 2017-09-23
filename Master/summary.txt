@@ -1,0 +1,81 @@
+why this project?
+
+- Tizen programming was too difficult
+ . object oriented programming
+ . class libraries
+ . a lot of references (document, sample codes, )
+
+- Why development environment is important?
+ . can it be described more precisely?
+
+- What are requirements of 3rd party developers?
+ . Then Tizen needs what?
+
+   Mobile Phone
+    - iOS
+    - Android
+    - Windows
+   TV
+    - Samsung TV
+      : Youtube, Netflix, Amazon, ... 
+    - AppleTV
+    - XBox
+   Wearable
+    - AppleWatch
+    - AndroidWear
+
+ . What applications?
+  
+  Phone/Messaging/Clock/Contact/Calendar/Tasker
+  Launcher
+  Navigation/Map
+  Education
+  SamsungConnect/IoT
+  Music/Vide
+  Youtube
+  Office
+  Facebook/Instagram
+  Information(restaurant, 
+  Shopping
+  Banking/Stock
+  Game
+  Camera/ImageProcessing
+  IconDesigner
+  BatterySaver
+  Vaccine
+  AI Services
+  Browser
+
+- What are requirements of inhouse developers?
+
+- Next?
+  IoT
+  Robot
+  Other devices
+  AI
+
+- Universal Platform of Microsoft
+
+- Apple's strategy
+
+- Google's strategy
+
+- Why Google has so much success??
+  :Open source but what is that different
+
+- Why Apple has so much sucess??
+  :No opening for source code
+
+- Why not Tizen??
+  No applications 
+  No market power (Android makes money??)
+  Why Galaxy? Why not Tizen?
+  
+- Critical points??
+  
+  
+
+
+
+
+
