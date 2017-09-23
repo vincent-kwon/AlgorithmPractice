@@ -87,6 +87,48 @@ vm.overcommit_memory: virtual memory limit on/off
 
                lesson: small bug can ruin system
 
+[swap] swap area is reserved in case process requires more memory
+       
+       /proc/<pid>/smaps or /status: shows memory info
+
+               Swap shows swap memory
+
+       smem -t : per process PSS, RSS
+       
+[swap] buddy system: 1, 2, 4, 8, ..... 
+       cat /proc/buddyinfo : show buddy memory
+
+       kernel moves inactive memory to swap area
+
+       dd if=/dev/zero of=./file_1 bs=1024 count=1000000 // 1GB file creation
+
+       when memory dd requested, cache is first released.
+
+       use vmstat to see memory usage in time change
+
+       vm.swappiness: how often swap memory move. default 60 // if this value bigger, no cache throw but move inactive to swap
+      
+       sysctl -w vm.swappiness=100
+
+       free's cached is page cache
+
+       vm.vfs_cache_pressure: when cache realloc, pageCache or directory/inode cache more 
+                              default is 100 
+                              if 0, no dentry and cache return (can cause system memory lack)
+
+[memory leak]  ps aux | grep -i malloc | grep -iv grep
+
+       pmap pid
+
+       shows memory usage by malloc (per) 
+
+       (gdb) dump memory /root/memory_dump 0x7fe148f88000 .....
+              
+       strings ./memory_dump
+
+       vm.vfs_cache_pressure:  
+
+       
                
 
 
