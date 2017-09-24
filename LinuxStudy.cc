@@ -32,7 +32,7 @@ vm.overcommit_memory: virtual memory limit on/off
 [free] buffers/cache: buffers & cached removed, free excluding buffer/cache is larger than free (what is it?)
 [free] swap: size of swap <== use some area of hard disk to be used for memory (what about speed?)
 [free] buffers cache: store meta data of file system 
-[free] cache: store page data of file system
+[free] page cache: store page data of file system
 [free] how memory change:
  - [    available       ][ used ]
  - [ available ][ cach ][used   ]
@@ -93,7 +93,7 @@ vm.overcommit_memory: virtual memory limit on/off
 
                Swap shows swap memory
 
-       smem -t : per process PSS, RSS
+       smem -t : per process PSS, RSS <== shows swap memory
        
 [swap] buddy system: 1, 2, 4, 8, ..... 
        cat /proc/buddyinfo : show buddy memory
@@ -128,7 +128,50 @@ vm.overcommit_memory: virtual memory limit on/off
 
        vm.vfs_cache_pressure:  
 
+[NUMA] UMA (early) <---> NUMA
+       UMA: all cpu use shared bus so if 0 cpu is accessing memory, 1 cpu can't access memory
+       NUMA: socket for cpus has own memory. 
+       Local access: memory0 accessed by socket #0 is NUMA architecture
+       numactl -H: shows numa info (how many, node distance - access time - from node (socket) 1 to node 2 time
+       numastat -cm: can show memory unbalance between processes <= too much memory usage can cause swap
+       cat /proc/pid/numa_maps <== in my pc, no numa (may UMA???) 
+       numastat 7564: shows heap, stack info of per node info
+       taskset -pc 1 7564: from which memory to allocate is defined here after this command
+       if process 7564 was using cpu 0 but now assigned to cpu 1 then the memory allocated by cpu 0 is now 
+       remote access (more time to access) <== Linux scheduler tends to stick to current Node amap 
+       membind_Bindpolicy: membind (stick to original - not recommended), 
+                   In membind policy, if memory is insufficient, use swap (instead of cpu 1) and crash <== terrible
+                   numastat `pidof malloc_test`; free -m
+       cpunodebind_BindPolicy: it allow only one CPU is being used and then if insufficient, use other cpu memory
+       It uses other cpu's memory, but it only uses cpu 0 so not good for multi-thread
+       physcpubind_BindPolicy: similar to cpu but ???? (later)
+       numactl --preferred=1 ./malloc_test: as much as possible to cpu 1
+       numactl --interleave=all ./malloc_test: assign evenly to cpus (used when more than 1 cpu for sure)
+       numad: no direct control using numactl but enhance locality of memory
+              help one process memory from one memory node. relatively good but can a process of numad can dominate one node
+              eventually process 0 using node 0 and 1 interleaved will face memory inconsistency
+       vm.zone_reclaim_mode kernel_param: not as important as numad but it can be used also
+               cat /proc/buddyinfo will show how memory node is being used (my notepc 1 node of 0(dma), 1(normal), 2(highmem))
+       DMA: before old hardware only work with DMA but not now.
+       Normal: general purpose kernel, process's memory. received from Normal memory area
+       vm.zone_reclain_mode allows in one memory area is lack of memory, allow other other mem to allow to use for others
+              0 is disable (use cache for more page cache like file server which can take more advantage with page cache than
+              many I/O), 1 is enable and good for the case of memory local access is important (not much file I/O)
        
+      single thread no single over: bind would be better to stick to one cpu socket
+                                    vm.zone_reclaim_mode = 1 fine because one node has all attention improve local access
+                                    
+      multi-thread  no single over: cpudnodebind => assign a process to many cores vm.zone_recelaim_mode 1 (not exceeding)
+   
+      single thread single over: cpunodebind, vm.zone_reclaim_mode 0 since requires more than one node of memry, rather than
+             reclaim memory but rather assigned from multi-node
+      multi-thread single over: may interleaved and vm.zone_reclaim_mode 0
+              
+       
+       
+              
+
+        
                
 
 
